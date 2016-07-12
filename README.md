@@ -8,7 +8,8 @@ Android常规项目框架，采用MVP架构,pull后可以在此基础上直接�
 
 项目架构图:
 
-![icon](http://pan.baidu.com/s/1qX9LEdY)
+![image](https://s3.amazonaws.com/f.cl.ly/items/0n1F473O2Z1H060n0x1l/androidTemplet架构.png)
+
 
 
 
