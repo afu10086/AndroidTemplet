@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="BarView_attrs">
+        <attr name="text" format="string" />
+        <attr name="bground_normal" format="color|reference" />
+        <attr name="bground_light" format="color|reference" />
+        <attr name="str_size" format="integer"/>
+    </declare-styleable>
+
+
+</resources>
