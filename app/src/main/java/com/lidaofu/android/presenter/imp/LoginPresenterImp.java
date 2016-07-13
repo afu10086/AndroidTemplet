@@ -11,7 +11,7 @@ import com.lidaofu.android.utils.StringUtils;
 /**
  * Created by LiDaofu on 16/7/10.
  *
- * presenter类中实现了LoginPresenter中的一些方法
+ * presenter类中实现了LoginPresenter中生命周期的一些方法
  * loginPresenterImp类可以复写需要的方法
  *
  */

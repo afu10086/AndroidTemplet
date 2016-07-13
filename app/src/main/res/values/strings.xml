@@ -2,4 +2,7 @@
     <string name="app_name">AndroidTemplet</string>
     <string name="action_settings">Settings</string>
     <string name="str_string_home">首页</string>
+    <string name="str_string_invest">投资</string>
+    <string name="str_string_money">理财</string>
+    <string name="str_string_me">我的</string>
 </resources>

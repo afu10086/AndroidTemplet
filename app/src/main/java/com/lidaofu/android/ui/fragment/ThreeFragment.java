@@ -12,7 +12,7 @@ public class ThreeFragment extends MainFragment {
 
     @Override
     public View setupView(LayoutInflater inflater) {
-        View view=inflater.inflate(R.layout.fragment_one,null);
+        View view=inflater.inflate(R.layout.fragment_three,null);
         return view;
     }
 

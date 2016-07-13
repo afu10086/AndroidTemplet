@@ -5,8 +5,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
-import com.qinhutouzi.www.utils.LogUtils;
-
 /**
  * Created by lidaofu on 2015/4/28.
  * 自定义view的基类
@@ -40,7 +38,6 @@ public abstract class CustomView extends LinearLayout {
 
 
     public void init(Context context){
-        LogUtils.i(TAG,"initview");
         this.context=context;
         inflater=LayoutInflater.from(context);
     }

@@ -141,17 +141,20 @@ public class OkHttpManager {
                         }
                     });
                 }
-
             }
         });
-
     }
+
 
 
     public static void httpDo(HttpHelpListener help, OkHttpListener listener) {
         Request request = getManagerInstance().getRequest(help);
         getManagerInstance().httpExecute(request, listener);
     }
+
+
+
+
 
 
 }
