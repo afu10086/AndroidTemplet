@@ -5,4 +5,9 @@
     <string name="str_string_invest">投资</string>
     <string name="str_string_money">理财</string>
     <string name="str_string_me">我的</string>
+    <string name="str_custom_view_nothing">什么也没有哦</string>
+    <string name="str_custom_view_reload">点击重新加载</string>
+    <string name="string_errorview_reload">重新加载</string>
+    <string name="string_errorview_network_error">网络不可用</string>
+    <string name="string_errorview_setting">设置</string>
 </resources>

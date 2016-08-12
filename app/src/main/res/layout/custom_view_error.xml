@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/str_custom_view_nothing" />
+
+
+    <TextView
+        android:id="@+id/tv_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_empty"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:text="@string/str_custom_view_reload" />
+
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avloading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:indicator="BallClipRotatePulse"
+        app:indicator_color="@color/colorPrimary" />
+
+
+</RelativeLayout>

@@ -1,24 +1,19 @@
 package com.lidaofu.android.ui.base;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.github.johnpersano.supertoasts.SuperToast;
 import com.lidaofu.android.R;
-import com.lidaofu.android.presenter.base.BaseView;
-import com.lidaofu.android.utils.StringUtils;
-import com.lidaofu.android.view.dialog.ProgressDialog;
 
 import butterknife.ButterKnife;
 
 /**
  * Created by LiDaofu on 16/7/11.
  */
-public abstract  class ToolbarActivity extends BaseActivity implements BaseView {
+public abstract  class ToolbarActivity extends BaseActivity {
 
     /**
      * 初始化view
@@ -32,16 +27,12 @@ public abstract  class ToolbarActivity extends BaseActivity implements BaseView 
 
     public TextView toolbar;
     private LinearLayout linearContent;
-    private ProgressDialog progressDialog;
-    private SuperToast superToast;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toobar);
-        progressDialog = new ProgressDialog(this);
-        superToast = new SuperToast(this);
         setupView();
         setupListener();
     }
@@ -69,47 +60,6 @@ public abstract  class ToolbarActivity extends BaseActivity implements BaseView 
     @Override
     public void setContentView(View view) {
         linearContent.addView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-    }
-
-    /**
-     * 显示progress
-     * @param text
-     */
-    public void showProgress(String text) {
-        if(progressDialog!=null&&!progressDialog.isShowing()){
-            if(!StringUtils.isBlank(text))
-                progressDialog.setProgressText(text);
-            progressDialog.show();
-        }
-    }
-
-    /**
-     * 隐藏progress
-     * @param text
-     */
-    public void hideProgress(String text) {
-        if(progressDialog!=null&&progressDialog.isShowing()){
-            if(!StringUtils.isBlank(text))
-                progressDialog.setProgressText(text);
-            progressDialog.hide();
-        }
-    }
-
-    /**
-     * 显示toast
-     * @param text
-     */
-    public void showText(String text) {
-        if (StringUtils.isBlank(text))
-            return;
-        SuperToast.cancelAllSuperToasts();
-        superToast.setAnimations(SuperToast.Animations.FLYIN);
-        superToast.setDuration(SuperToast.Duration.SHORT);
-        superToast.setTextColor(Color.parseColor("#ffffff"));
-        superToast.setTextSize(SuperToast.TextSize.SMALL);
-        superToast.setBackground(SuperToast.Background.BLUE);
-        superToast.setText(text);
-        superToast.show();
     }
 
 

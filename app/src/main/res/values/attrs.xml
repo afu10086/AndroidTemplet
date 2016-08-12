@@ -8,5 +8,8 @@
         <attr name="str_size" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="ErrorView">
+        <attr name="isLoad" format="boolean"/>
+    </declare-styleable>
 
 </resources>

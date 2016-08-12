@@ -38,11 +38,7 @@ public class UserApiImp extends BaseApi implements UserApi{
                 listener.onFail(error.getMessage());
             }
         });
-
     }
-
-
-
 
     @Override
     public void register(User user, ApiListener<User> listener) {

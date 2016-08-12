@@ -25,7 +25,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
+
     compile 'com.jakewharton:butterknife:7.0.1'
+    //刷新框架
+    compile 'in.srain.cube:cube-sdk:1.0.44@aar'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
     //fastjson
     compile 'com.alibaba:fastjson:1.1.46.android'
     //AVloading

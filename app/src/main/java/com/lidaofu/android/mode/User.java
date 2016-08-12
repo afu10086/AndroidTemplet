@@ -3,7 +3,7 @@ package com.lidaofu.android.mode;
 /**
  * Created by LiDaofu on 16/7/10.
  */
-public class User {
+public class User extends Entity {
 
     public String userName;
     public String userPass;
