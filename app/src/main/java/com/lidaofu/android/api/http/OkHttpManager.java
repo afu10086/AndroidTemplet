@@ -3,6 +3,7 @@ package com.lidaofu.android.api.http;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.lidaofu.android.utils.LogUtils;
 import com.lidaofu.android.utils.NetManager;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Headers;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class OkHttpManager {
 
+    private static final java.lang.String TAG =OkHttpManager.class.getSimpleName();
     private static int HTTP_ERROR_CODE = 100;
 
     private static OkHttpManager instance;
@@ -61,8 +63,10 @@ public class OkHttpManager {
 
         //添加http头信息
         List<HttpHelpListener.Params> heads = help.getHttpHead();
-        for (HttpHelpListener.Params param : heads) {
-            builder.addHeader(param.key, param.values);
+        if(heads!=null) {
+            for (HttpHelpListener.Params param : heads) {
+                builder.addHeader(param.key, param.values);
+            }
         }
 
         String params = help.getHttpParams();
@@ -126,6 +130,7 @@ public class OkHttpManager {
                 final String body = response.body().string();
                 final Headers headers = response.headers();
                 final int httpCode = response.code();
+                LogUtils.i(TAG,"HTTP_CODE:"+httpCode);
                 if (response.isSuccessful()) {
                     handler.post(new Runnable() {
                         @Override

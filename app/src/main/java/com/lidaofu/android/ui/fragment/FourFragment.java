@@ -1,30 +1,46 @@
 package com.lidaofu.android.ui.fragment;
 
 import android.os.Bundle;
-import android.view.View;
 
-import com.lidaofu.android.R;
-import com.lidaofu.android.ui.base.BaseFragment;
+import com.alibaba.fastjson.TypeReference;
+import com.lidaofu.android.adapter.BaseViewAdapter;
+import com.lidaofu.android.adapter.FourFragmentAdapter;
+import com.lidaofu.android.api.Api;
+import com.lidaofu.android.mode.Invest;
+import com.lidaofu.android.mode.PagerInfo;
+import com.lidaofu.android.ui.base.BaseListFragment;
+
+import java.lang.reflect.Type;
 
 /**
  * Created by LiDaofu on 16/7/11.
  */
-public class FourFragment extends BaseFragment {
+public class FourFragment extends BaseListFragment {
+
+    private int pager=1;
+
+    @Override
+    protected BaseViewAdapter getListAdapter() {
+        return new FourFragmentAdapter(getActivity());
+    }
 
 
     @Override
-    protected void setupView(View view) {
-
+    protected String getFirstLoadUrl() {
+        pager=1;
+        return Api.listUrlTest+pager;
     }
 
     @Override
-    public void setupListener() {
-
+    protected String getLoadMoreUrl() {
+        pager++;
+        return Api.listUrlTest+pager;
     }
 
+
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_four;
+    protected void setupListener() {
+
     }
 
     @Override
@@ -35,5 +51,10 @@ public class FourFragment extends BaseFragment {
     @Override
     protected void setupArgs(Bundle arguments) {
 
+    }
+
+    @Override
+    public Type getType() {
+        return new TypeReference<PagerInfo<Invest>>(){}.getType();
     }
 }

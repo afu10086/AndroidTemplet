@@ -7,15 +7,22 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.lidaofu.android.mode.Entity;
+import com.lidaofu.android.view.itemview.LayoutPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by LiDaofu on 16/8/11.
+ *
+ * 基类Adapter
+ *
+ *
  */
-public abstract class BaseViewAdapter<M extends Entity, V extends BaseViewHolder> extends BaseAdapter {
+public abstract class BaseViewAdapter<M extends Entity> extends BaseAdapter {
 
+
+    private static final java.lang.String TAG =BaseViewAdapter.class.getSimpleName();
 
     protected Context context;
     private List<M> totalList;
@@ -23,29 +30,10 @@ public abstract class BaseViewAdapter<M extends Entity, V extends BaseViewHolder
 
 
     /**
-     * 返回layout item 视图id
+     * 返回custom item view
      * @return
      */
     protected abstract int getLayoutId();
-
-    /**
-     * 返回一个viewholder
-     * @param view layout item 生成的view
-     * @param <V> 限定v是BaseViewHolder的子类
-     * @return
-     */
-    protected abstract <V extends BaseViewHolder> V getViewHolder(View view);
-
-    /**
-     * 数据填充
-     * @param holder holder
-     * @param mode 数据model
-     */
-    protected abstract void setupData(V holder,M mode);
-
-
-
-
 
 
     public BaseViewAdapter(Context context) {
@@ -140,18 +128,14 @@ public abstract class BaseViewAdapter<M extends Entity, V extends BaseViewHolder
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         M mode = getItem(position);
-        V holder = null;
-        View itemView = null;
-        if (convertView == null || convertView.getTag() == null) {
-            itemView = inflater.inflate(getLayoutId(), parent, false);
-            holder = getViewHolder(itemView);
-            itemView.setTag(holder);
-        } else {
-            itemView=convertView;
-            holder= (V) convertView.getTag();
+        final LayoutPresenter layoutPresenter;
+        if(convertView==null){
+            layoutPresenter= (LayoutPresenter) inflater.inflate(getLayoutId(),parent,false);
+        }else{
+            layoutPresenter= (LayoutPresenter) convertView;
         }
-        setupData(holder,mode);
-        return itemView;
+        layoutPresenter.update(mode);
+        return (View) layoutPresenter;
     }
 
 

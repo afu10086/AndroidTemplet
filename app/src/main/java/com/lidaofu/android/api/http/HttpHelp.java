@@ -15,6 +15,7 @@ public class HttpHelp implements HttpHelpListener {
 
     public HttpHelp(String httpUrl){
         this.httpUrl=httpUrl;
+        this.httpMethod=HttpMethod.GET;
     }
 
     public HttpHelp(String httpUrl,HttpMethod method){

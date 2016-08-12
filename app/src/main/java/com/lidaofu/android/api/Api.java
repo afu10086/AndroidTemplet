@@ -15,6 +15,7 @@ public interface Api {
     String registerUrl="http:www.baidu.com/register";
 
 
+    String listUrlTest="http://beta.service.qinhucloud.com/loan_slice?type=0&public=1&orderby=status,asc&!status=7&per_page=10&page=";
 
 
 

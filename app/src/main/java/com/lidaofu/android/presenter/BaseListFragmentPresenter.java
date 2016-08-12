@@ -4,6 +4,8 @@ import com.lidaofu.android.mode.PagerInfo;
 import com.lidaofu.android.presenter.base.BasePresenter;
 import com.lidaofu.android.presenter.base.BaseView;
 
+import java.lang.reflect.Type;
+
 /**
  * Created by LiDaofu on 16/7/10.
  */
@@ -35,6 +37,14 @@ public interface BaseListFragmentPresenter extends BasePresenter{
          * @param data
          */
         public void response(PagerInfo<M> data);
+
+
+        /**
+         * 返回要解析的数据类型
+         * eg: new TypeReference<PagerInfo<Invest>>()
+         * @return
+         */
+        public Type getType();
     }
 
 

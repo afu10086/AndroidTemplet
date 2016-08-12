@@ -1,18 +1,21 @@
 package com.lidaofu.android.presenter.imp;
 
+import com.alibaba.fastjson.JSON;
 import com.lidaofu.android.api.ApiListener;
 import com.lidaofu.android.api.BaseApi;
-import com.lidaofu.android.mode.Entity;
 import com.lidaofu.android.mode.PagerInfo;
 import com.lidaofu.android.presenter.BaseListFragmentPresenter;
 import com.lidaofu.android.presenter.base.Presenter;
+import com.lidaofu.android.utils.LogUtils;
 import com.lidaofu.android.utils.StringUtils;
 
 /**
  * Created by LiDaofu on 16/7/10.
  * <p>
  */
-public class BaseListFragmentPresenterImp<M extends Entity> extends Presenter<BaseListFragmentPresenter.BaseListFragmentView> implements BaseListFragmentPresenter {
+public class BaseListFragmentPresenterImp extends Presenter<BaseListFragmentPresenter.BaseListFragmentView> implements BaseListFragmentPresenter {
+
+    private static final java.lang.String TAG = BaseListFragmentPresenterImp.class.getSimpleName();
 
     private BaseApi baseApi;
 
@@ -28,11 +31,19 @@ public class BaseListFragmentPresenterImp<M extends Entity> extends Presenter<Ba
         if (StringUtils.isBlank(httpUrl) || !httpUrl.contains("http"))
             return;
         view.onPostExecute();
-        baseApi.requestData(httpUrl, new ApiListener<PagerInfo<M>>() {
+        baseApi.requestData(httpUrl, new ApiListener<String>() {
             @Override
-            public void onSuccess(PagerInfo<M> pagerInfo) {
-                view.response(pagerInfo);
-                view.onPostExecute();
+            public void onSuccess(String response) {
+                PagerInfo pagerInfo = null;
+                try {//fastjson泛型解析  new TypeReference<PagerInfo<M>>()
+                    pagerInfo = JSON.parseObject(response,view.getType());
+                } catch (Exception e) {
+                    LogUtils.i(TAG, "解析失败");
+                    view.onLoadError();
+                }
+                if (pagerInfo != null) {
+                    view.response(pagerInfo);
+                }
             }
 
             @Override
