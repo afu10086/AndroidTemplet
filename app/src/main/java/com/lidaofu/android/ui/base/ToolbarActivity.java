@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lidaofu.android.R;
+import com.lidaofu.android.utils.StringUtils;
 
 import butterknife.ButterKnife;
 
@@ -25,7 +26,18 @@ public abstract  class ToolbarActivity extends BaseActivity {
      */
     public abstract void setupListener();
 
+
+    /**
+     * toolbar标题
+     * @return
+     */
+    public abstract String getToolbarTitle();
+
+    /**
+     * 标题
+     */
     public TextView toolbar;
+
     private LinearLayout linearContent;
 
 
@@ -44,6 +56,11 @@ public abstract  class ToolbarActivity extends BaseActivity {
             super.setContentView(layoutResID);
             linearContent = (LinearLayout) findViewById(R.id.lineContent);
             toolbar = (TextView) findViewById(R.id.tv_toolbar_title);
+            if(!StringUtils.isBlank(getToolbarTitle())) {
+                toolbar.setText(getToolbarTitle());
+            }else{
+                toolbar.setText(R.string.app_name);
+            }
             return;
         }
         View view = inflater.inflate(layoutResID, null);

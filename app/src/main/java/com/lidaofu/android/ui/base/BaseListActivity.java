@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import in.srain.cube.util.LocalDisplay;
 import in.srain.cube.views.loadmore.LoadMoreContainer;
 import in.srain.cube.views.loadmore.LoadMoreHandler;
@@ -26,31 +27,31 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
+
 /**
- * Created by LiDaofu on 16/8/11.
+ * Created by LiDaofu on 16/8/13.
  *
- * 包含ListView 刷新,加载更多的一个Fragment基类;
+ * 包含ListView 刷新,加载更多的一个Activity基类,与BaseListFragment一样
  * 如果页面是一个ListView可以继承此基类,实现相关方法即可
- * eg:FourFragment
+ * eg:ListActivity
  *
  */
-public abstract class BaseListFragment extends BaseFragment implements PtrHandler, LoadMoreHandler, BaseListFragmentPresenter.BaseListFragmentView,ErrorView.ErrorInterface {
-
-    private static final java.lang.String TAG =BaseListFragment.class.getSimpleName();
+public abstract class BaseListActivity extends ToolbarActivity implements PtrHandler, LoadMoreHandler, ErrorView.ErrorInterface, BaseListFragmentPresenter.BaseListFragmentView {
 
     @Bind(R.id.list_fragment)
-    protected ListView listFragment;
-    @Bind(R.id.ptr_frame_list)
-    PtrClassicFrameLayout ptrFrameList;
+    ListView listFragment;
     @Bind(R.id.ptr_frame_load_more)
     LoadMoreListViewContainer loadMoreListViewContainer;
+    @Bind(R.id.ptr_frame_list)
+    PtrClassicFrameLayout ptrFrameList;
     @Bind(R.id.error_view)
     ErrorView errorView;
 
+
     protected BaseViewAdapter baseAdapter;
-    private BaseListFragmentPresenter presenter;
+    protected ArrayList totalList;
     private boolean isFirstLoad = false;
-    private List totalList;
+    private BaseListFragmentPresenter presenter;
 
     /**
      * 返回list的adapter
@@ -72,18 +73,15 @@ public abstract class BaseListFragment extends BaseFragment implements PtrHandle
     protected abstract String getLoadMoreUrl();
 
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_base_list;
-    }
-
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
-    protected void setupView(View view) {
+    public void setupView() {
+        setContentView(R.layout.fragment_base_list);
+        ButterKnife.bind(this);
 
         ptrFrameList.setLoadingMinTime(500);
-        StoreHouseHeader header = new StoreHouseHeader(getActivity());
+        StoreHouseHeader header = new StoreHouseHeader(this);
         header.setPadding(0, LocalDisplay.dp2px(20), 0, LocalDisplay.dp2px(20));
         header.initWithString(getResources().getString(R.string.app_name), 32);
         int color = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ? getResources().getColor(R.color.colorPrimary, null) : getResources().getColor(R.color.colorPrimary);
@@ -101,13 +99,14 @@ public abstract class BaseListFragment extends BaseFragment implements PtrHandle
         totalList = new ArrayList<>();
         baseAdapter.setTotalList(totalList);
 
+        errorView.setErrorListener(this);
         errorView.setEmptyType(ErrorView.ErrorView_Load);
 
         presenter = new BaseListFragmentPresenterImp(this);
         presenter.loadData();
         isFirstLoad = true;
-    }
 
+    }
 
     @Override
     public String getHttpUrl() {
@@ -199,4 +198,5 @@ public abstract class BaseListFragment extends BaseFragment implements PtrHandle
             presenter.loadData();
         }
     }
+
 }

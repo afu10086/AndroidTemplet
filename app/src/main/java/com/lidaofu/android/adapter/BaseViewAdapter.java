@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.lidaofu.android.mode.Entity;
+import com.lidaofu.android.utils.WarnException;
 import com.lidaofu.android.view.itemview.LayoutPresenter;
 
 import java.util.ArrayList;
@@ -130,7 +131,12 @@ public abstract class BaseViewAdapter<M extends Entity> extends BaseAdapter {
         M mode = getItem(position);
         final LayoutPresenter layoutPresenter;
         if(convertView==null){
-            layoutPresenter= (LayoutPresenter) inflater.inflate(getLayoutId(),parent,false);
+            View itemView=inflater.inflate(getLayoutId(),parent,false);
+            if(!(itemView instanceof LayoutPresenter)){
+                throw new WarnException("ItemView must implement LayoutPresenter!");
+            }else {
+                layoutPresenter = (LayoutPresenter) inflater.inflate(getLayoutId(), parent, false);
+            }
         }else{
             layoutPresenter= (LayoutPresenter) convertView;
         }

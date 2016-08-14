@@ -26,7 +26,6 @@ public class LoginActivity extends ToolbarActivity implements LoginPresenter.Log
     @Override
     public void setupView() {
         setContentView(R.layout.activity_login);
-        toolbar.setText("登录");
         ButterKnife.bind(this);
         presenter = new LoginPresenterImp(this);
 
@@ -43,6 +42,11 @@ public class LoginActivity extends ToolbarActivity implements LoginPresenter.Log
             }
         });
 
+    }
+
+    @Override
+    public String getToolbarTitle() {
+        return getString(R.string.str_login);
     }
 
 

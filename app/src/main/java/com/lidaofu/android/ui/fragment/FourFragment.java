@@ -1,6 +1,9 @@
 package com.lidaofu.android.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.alibaba.fastjson.TypeReference;
 import com.lidaofu.android.adapter.BaseViewAdapter;
@@ -8,6 +11,7 @@ import com.lidaofu.android.adapter.FourFragmentAdapter;
 import com.lidaofu.android.api.Api;
 import com.lidaofu.android.mode.Invest;
 import com.lidaofu.android.mode.PagerInfo;
+import com.lidaofu.android.ui.activity.ListActivity;
 import com.lidaofu.android.ui.base.BaseListFragment;
 
 import java.lang.reflect.Type;
@@ -40,6 +44,14 @@ public class FourFragment extends BaseListFragment {
 
     @Override
     protected void setupListener() {
+
+        listFragment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(), ListActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

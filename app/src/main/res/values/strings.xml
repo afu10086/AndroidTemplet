@@ -10,4 +10,6 @@
     <string name="string_errorview_reload">重新加载</string>
     <string name="string_errorview_network_error">网络不可用</string>
     <string name="string_errorview_setting">设置</string>
+    <string name="ListActivity">ListActivity</string>
+    <string name="str_login">登录</string>
 </resources>

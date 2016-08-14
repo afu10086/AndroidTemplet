@@ -32,6 +32,7 @@ public class MainActivity extends ToolbarActivity {
     private FourFragment fourFragment;
 
     private int[] titles={R.string.str_string_home,R.string.str_string_invest,R.string.str_string_money,R.string.str_string_me};
+    private String toolBarTitle;
 
     @Override
     public void setupView() {
@@ -54,12 +55,17 @@ public class MainActivity extends ToolbarActivity {
 
     }
 
+    @Override
+    public String getToolbarTitle() {
+        return toolBarTitle;
+    }
+
     private void updateFragment(int location) {
         FragmentTransaction transaction = manager.beginTransaction();
         hideFragment(transaction);
         switch (location) {
             case 1:
-                toolbar.setText(R.string.str_string_home);
+                toolBarTitle=getString(titles[0]);
                 if (oneFragment == null) {
                     oneFragment = new OneFragment();
                     transaction.add(R.id.main_frag_content, oneFragment);
@@ -68,7 +74,7 @@ public class MainActivity extends ToolbarActivity {
                 }
                 break;
             case 2:
-                toolbar.setText(R.string.str_string_invest);
+                toolBarTitle=getString(titles[1]);
                 if (twoFragment == null) {
                     twoFragment = new TwoFragment();
                     transaction.add(R.id.main_frag_content, twoFragment);
@@ -77,7 +83,7 @@ public class MainActivity extends ToolbarActivity {
                 }
                 break;
             case 3:
-                toolbar.setText(R.string.str_string_money);
+                toolBarTitle=getString(titles[2]);
                 if (threeFragment == null) {
                     threeFragment = new ThreeFragment();
                     transaction.add(R.id.main_frag_content, threeFragment);
@@ -86,7 +92,7 @@ public class MainActivity extends ToolbarActivity {
                 }
                 break;
             case 4:
-                toolbar.setText(R.string.str_string_me);
+                toolBarTitle=getString(titles[3]);
                 if (fourFragment == null) {
                     fourFragment = new FourFragment();
                     transaction.add(R.id.main_frag_content, fourFragment);
